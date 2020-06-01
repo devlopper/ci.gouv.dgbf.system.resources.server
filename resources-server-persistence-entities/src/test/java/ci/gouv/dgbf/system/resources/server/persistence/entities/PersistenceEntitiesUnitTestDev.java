@@ -8,7 +8,7 @@ import org.cyk.utility.__kernel__.persistence.query.EntityReader;
 import org.cyk.utility.__kernel__.test.weld.AbstractPersistenceUnitTest;
 import org.junit.jupiter.api.Test;
 
-public class PersistenceUnitTestDev extends AbstractPersistenceUnitTest {
+public class PersistenceEntitiesUnitTestDev extends AbstractPersistenceUnitTest {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -18,7 +18,8 @@ public class PersistenceUnitTestDev extends AbstractPersistenceUnitTest {
 	
 	@Test
 	public void run(){
-		printSections();
+		assertCountIsGreaterThanZero(Section.class,BudgetSpecializationUnitType.class,BudgetSpecializationUnitCategory.class
+				,BudgetSpecializationUnit.class,Activity.class,EconomicNature.class);
 	}
 	
 	public void printSections(){

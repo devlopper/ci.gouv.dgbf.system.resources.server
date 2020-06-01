@@ -7,6 +7,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.cyk.utility.__kernel__.persistence.query.EntityFinder;
+import org.cyk.utility.__kernel__.string.StringHelper;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,11 +38,18 @@ public class BudgetSpecializationUnit extends AbstractNamableWithTransientAmount
 		return (BudgetSpecializationUnit) super.setName(name);
 	}
 	
+	public BudgetSpecializationUnit setCategoryFromIdentifier(String identifier) {
+		if(StringHelper.isBlank(identifier))
+			setCategory(null);
+		setCategory(EntityFinder.getInstance().find(BudgetSpecializationUnitCategory.class, identifier));
+		return this;
+	}
+	
 	public static final String FIELD_SECTION = "section";
 	public static final String FIELD_CATEGORY = "category";
 	
 	public static final String COLUMN_SECTION = "SECTION";
 	public static final String COLUMN_CATEGORY = "CATEGORIE";
 	
-	public static final String TABLE_NAME = "usb";	
+	public static final String TABLE_NAME = "USB";	
 }

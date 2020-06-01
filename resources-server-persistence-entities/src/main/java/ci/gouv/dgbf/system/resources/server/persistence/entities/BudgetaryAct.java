@@ -23,6 +23,8 @@ import lombok.experimental.Accessors;
 public class BudgetaryAct extends AbstractIdentifiableSystemScalarStringIdentifiableBusinessStringNamableImpl implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Column(name=COLUMN_YEAR) private String year;
+	
 	@Override
 	public BudgetaryAct setIdentifier(String identifier) {
 		return (BudgetaryAct) super.setIdentifier(identifier);
@@ -38,5 +40,9 @@ public class BudgetaryAct extends AbstractIdentifiableSystemScalarStringIdentifi
 		return (BudgetaryAct) super.setName(name);
 	}
 	
-	public static final String TABLE_NAME = "acte_budgetaire";	
+	public static final String FIELD_YEAR = "year";
+	
+	public static final String COLUMN_YEAR = "AB_EXERCICE";
+	
+	public static final String TABLE_NAME = "ACTE_BUDGETAIRE";	
 }

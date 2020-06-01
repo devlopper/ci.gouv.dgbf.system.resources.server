@@ -30,5 +30,5 @@ public class BudgetSpecializationUnitType extends AbstractNamableWithTransientAm
 		return (BudgetSpecializationUnitType) super.setName(name);
 	}
 	
-	public static final String TABLE_NAME = "type_usb";	
+	public static final String TABLE_NAME = "TYPE_USB";	
 }

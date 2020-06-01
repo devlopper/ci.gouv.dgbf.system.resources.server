@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.cyk.utility.__kernel__.persistence.query.EntityFinder;
+import org.cyk.utility.__kernel__.string.StringHelper;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,6 +43,13 @@ public class BudgetaryActVersion extends AbstractIdentifiableSystemScalarStringI
 	@Override
 	public BudgetaryActVersion setName(String name) {
 		return (BudgetaryActVersion) super.setName(name);
+	}
+	
+	public BudgetaryActVersion setBudgetaryActFromIdentifier(String identifier) {
+		if(StringHelper.isBlank(identifier))
+			setBudgetaryAct(null);
+		setBudgetaryAct(EntityFinder.getInstance().find(BudgetaryAct.class, identifier));
+		return this;
 	}
 	
 	public static final String FIELD_BUDGETARY_ACT = "budgetaryAct";

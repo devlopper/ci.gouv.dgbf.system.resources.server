@@ -3,7 +3,12 @@ package ci.gouv.dgbf.system.resources.server.persistence.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.cyk.utility.__kernel__.persistence.query.EntityFinder;
+import org.cyk.utility.__kernel__.string.StringHelper;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,10 +20,33 @@ import lombok.experimental.Accessors;
 public class Activity extends AbstractNamableWithTransientAmounts implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@ManyToOne @JoinColumn(name = COLUMN_BUDGET_SPECIALIZATION_UNIT) private BudgetSpecializationUnit budgetSpecializationUnit;
+	
 	@Override
 	public Activity setIdentifier(String identifier) {
 		return (Activity) super.setIdentifier(identifier);
 	}
+	
+	@Override
+	public Activity setCode(String code) {
+		return (Activity) super.setCode(code);
+	}
+	
+	@Override
+	public Activity setName(String name) {
+		return (Activity) super.setName(name);
+	}
+	
+	public Activity setBudgetSpecializationUnitFromIdentifier(String identifier) {
+		if(StringHelper.isBlank(identifier))
+			setBudgetSpecializationUnit(null);
+		setBudgetSpecializationUnit(EntityFinder.getInstance().find(BudgetSpecializationUnit.class, identifier));
+		return this;
+	}
+	
+	public static final String FIELD_BUDGET_SPECIALIZATION_UNIT = "budgetSpecializationUnit";
+	
+	public static final String COLUMN_BUDGET_SPECIALIZATION_UNIT = "USB";
 	
 	public static final String TABLE_NAME = "ACTIVITE";	
 }

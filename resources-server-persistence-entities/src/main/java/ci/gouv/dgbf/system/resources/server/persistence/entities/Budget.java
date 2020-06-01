@@ -26,7 +26,8 @@ import lombok.experimental.Accessors;
 public class Budget extends AbstractIdentifiableSystemScalarStringIdentifiableBusinessStringImpl implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne @JoinColumn(name = COLUMN_BUDGETARY_ACT_VERSION) private BudgetaryActVersion budgetaryActVersion;
+	@ManyToOne @JoinColumn(name = COLUMN_SPECIALIZATION_UNIT) private BudgetSpecializationUnit specializationUnit;
+	@ManyToOne @JoinColumn(name = COLUMN_ACT_VERSION) private BudgetaryActVersion actVersion;
 	
 	@Override
 	public Budget setIdentifier(String identifier) {
@@ -38,9 +39,11 @@ public class Budget extends AbstractIdentifiableSystemScalarStringIdentifiableBu
 		return (Budget) super.setCode(code);
 	}
 	
-	public static final String FIELD_BUDGETARY_ACT_VERSION = "budgetaryActVersion";
+	public static final String FIELD_SPECIALIZATION_UNIT = "specializationUnit";
+	public static final String FIELD_ACT_VERSION = "actVersion";
 	
-	public static final String COLUMN_BUDGETARY_ACT_VERSION = "BUD_VAB_ID";
+	public static final String COLUMN_SPECIALIZATION_UNIT = "BUD_USB_ID";
+	public static final String COLUMN_ACT_VERSION = "BUD_VAB_ID";
 	
 	public static final String TABLE_NAME = "budget";	
 }

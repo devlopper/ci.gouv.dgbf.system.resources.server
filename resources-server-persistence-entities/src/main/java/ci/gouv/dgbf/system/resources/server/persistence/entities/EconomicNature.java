@@ -20,5 +20,15 @@ public class EconomicNature extends AbstractIdentifiableSystemScalarStringIdenti
 		return (EconomicNature) super.setIdentifier(identifier);
 	}
 	
+	@Override
+	public EconomicNature setCode(String code) {
+		return (EconomicNature) super.setCode(code);
+	}
+	
+	@Override
+	public EconomicNature setName(String name) {
+		return (EconomicNature) super.setName(name);
+	}
+	
 	public static final String TABLE_NAME = "nature_economique";	
 }
