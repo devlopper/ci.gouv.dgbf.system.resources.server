@@ -14,7 +14,9 @@ import org.cyk.utility.__kernel__.persistence.query.QueryHelper;
 import org.cyk.utility.__kernel__.persistence.query.QueryResultMapper;
 
 import ci.gouv.dgbf.system.resources.server.persistence.api.query.ActivityByBudgetSpecializationUnitQuerier;
+import ci.gouv.dgbf.system.resources.server.persistence.api.query.BudgetQuerier;
 import ci.gouv.dgbf.system.resources.server.persistence.api.query.BudgetSpecializationUnitCategoryQuerier;
+import ci.gouv.dgbf.system.resources.server.persistence.api.query.BudgetaryActVersionQuerier;
 import ci.gouv.dgbf.system.resources.server.persistence.api.query.EconomicNatureQuerier;
 import ci.gouv.dgbf.system.resources.server.persistence.api.query.ResourceByActivityQuerier;
 import ci.gouv.dgbf.system.resources.server.persistence.api.query.ResourceQuerier;
@@ -48,7 +50,9 @@ public class ApplicationScopeLifeCycleListener extends AbstractApplicationScopeL
 				,BudgetSpecializationUnitCategory.class,BudgetSpecializationUnitType.class,Section.class,BudgetaryActVersion.class,BudgetaryAct.class));
 		
 		SectionQuerier.initialize();
+		BudgetaryActVersionQuerier.initialize();
 		BudgetSpecializationUnitCategoryQuerier.initialize();
+		BudgetQuerier.initialize();
 		EconomicNatureQuerier.initialize();
 		
 		ActivityByBudgetSpecializationUnitQuerier.initialize();

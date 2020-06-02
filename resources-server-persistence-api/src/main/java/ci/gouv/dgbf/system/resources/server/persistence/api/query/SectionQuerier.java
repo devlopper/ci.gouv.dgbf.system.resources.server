@@ -32,7 +32,7 @@ public interface SectionQuerier extends Querier {
 	String QUERY_IDENTIFIER_READ_ORDER_BY_CODE_ASCENDING = QueryIdentifierBuilder.getInstance().build(Section.class, QUERY_NAME_READ_ORDER_BY_CODE_ASCENDING);
 	
 	/* read amounts aggregation order by code ascending */
-	String QUERY_NAME_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING = "readAggregationOrderByCodeAscending";
+	String QUERY_NAME_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING = "readAggregationByBudgetaryActVersionCodeOrderByCodeAscending";
 	String QUERY_IDENTIFIER_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING = QueryIdentifierBuilder.getInstance().build(Section.class, QUERY_NAME_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING);
 	Map<String,Integer> QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_TUPLE_FIELDS_NAMES_INDEXES = ResourceQuerier
 			.deriveSumsTupleFieldsNamesIndexes(Section.FIELD_IDENTIFIER,Section.FIELD_CODE,Section.FIELD_NAME);
@@ -41,10 +41,8 @@ public interface SectionQuerier extends Querier {
 			+" FROM Section t "
 			+" LEFT JOIN BudgetSpecializationUnit budgetSpecializationUnit ON budgetSpecializationUnit.section.identifier = t.identifier "
 			+" LEFT JOIN Activity activity ON activity.budgetSpecializationUnit.identifier = budgetSpecializationUnit.identifier "
-			+" LEFT JOIN Resource resource ON resource.activity.identifier = activity.identifier "			
-			
-			+" WHERE resource.budget.actVersion.code = :"+PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE+" "
-			
+			+" LEFT JOIN Resource resource ON resource.activity.identifier = activity.identifier "						
+			+" WHERE resource.budget.actVersion.code = :"+PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE+" "			
 			+" GROUP BY t.identifier,t.code,t.name "
 			+" ORDER BY t.code ASC"
 			;

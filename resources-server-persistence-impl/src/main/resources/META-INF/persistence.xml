@@ -2,6 +2,21 @@
   
     <persistence-unit name="resourcesPersistenceUnit" transaction-type="JTA">
     	<jta-data-source>${data.source.jndi.name}</jta-data-source>
+    	
+    	<!-- Read -->
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Section</class>
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitType</class>
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitCategory</class>		
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnit</class>
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetaryAct</class>
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetaryActVersion</class>
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Budget</class>
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.EconomicNature</class>
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Activity</class>
+    	
+    	<!-- Transaction -->    	
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Resource</class>
+    	
     	<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="validate"/>

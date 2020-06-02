@@ -31,4 +31,6 @@ public class BudgetSpecializationUnitType extends AbstractNamableWithTransientAm
 	}
 	
 	public static final String TABLE_NAME = "TYPE_USB";	
+	
+	public static final String CODE_RESOURCE = "0";
 }

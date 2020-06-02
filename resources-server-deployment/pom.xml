@@ -25,7 +25,7 @@
 		<web.context>/${jboss-web.context-root}</web.context>
 		
 		<!-- Development -->
-		<data.source.oracle.dev.user>SIIBC_EAB_DEV</data.source.oracle.dev.user>
+		<data.source.oracle.dev.user>SIIBC_EAB</data.source.oracle.dev.user>
 		<data.source.oracle.dev.password>eab</data.source.oracle.dev.password>
 		<!-- Test -->
 		

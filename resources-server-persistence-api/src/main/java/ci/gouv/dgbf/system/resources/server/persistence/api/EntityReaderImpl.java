@@ -19,7 +19,7 @@ public class EntityReaderImpl extends EntityReader.AbstractImpl implements Seria
 			if(ResourceQuerier.QUERY_IDENTIFIER_READ_VIEW_01.equals(arguments.getQuery().getIdentifier()))
 				return (Collection<T>) ResourceQuerier.getInstance().readMany(arguments);
 			if(ActivityQuerier.QUERY_IDENTIFIER_READ_WHERE_CODE_LIKE_AND_NAME_LIKE.equals(arguments.getQuery().getIdentifier()))
-				return (Collection<T>) ActivityQuerier.getInstance().readMany(arguments);			
+				return (Collection<T>) ActivityQuerier.getInstance().readMany(arguments);				
 		}
 		return super.readMany(resultClass, arguments);
 	}	

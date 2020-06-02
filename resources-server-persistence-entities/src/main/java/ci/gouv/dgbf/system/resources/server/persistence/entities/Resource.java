@@ -26,7 +26,7 @@ import lombok.experimental.Accessors;
 @AttributeOverrides(value= {
 		@AttributeOverride(name=Resource.FIELD_IDENTIFIER,column = @Column(name="UUID"))
 })
-public class Resource extends AbstractIdentifiableSystemScalarStringImpl implements Serializable {
+public class Resource extends AbstractIdentifiableSystemScalarStringImpl implements Serializable,Amountable {
 	private static final long serialVersionUID = 1L;
 	
 	@NotNull @ManyToOne @JoinColumn(name = COLUMN_BUDGET) private Budget budget;
@@ -38,6 +38,8 @@ public class Resource extends AbstractIdentifiableSystemScalarStringImpl impleme
 	})
 	private Amounts amounts = new Amounts();
 	
+	@Transient private BudgetSpecializationUnit budgetSpecializationUnit;
+	@Transient private BudgetaryActVersion budgetaryActVersion;
 	@Transient private String sectionAsString,activityAsString,budgetSpecializationUnitAsString,economicNatureAsString;
 	
 	@Override

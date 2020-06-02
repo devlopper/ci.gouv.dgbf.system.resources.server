@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.cyk.utility.__kernel__.object.__static__.persistence.AbstractIdentifiableSystemScalarStringIdentifiableBusinessStringImpl;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +21,7 @@ import lombok.experimental.Accessors;
 		@AttributeOverride(name=Budget.FIELD_IDENTIFIER,column = @Column(name="UUID"))
 		,@AttributeOverride(name=Budget.FIELD_CODE,column = @Column(name="BUD_CODE"))
 })
-public class Budget extends AbstractIdentifiableSystemScalarStringIdentifiableBusinessStringImpl implements Serializable {
+public class Budget extends AbstractIdentifiableBusinessWithTransientAmounts implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne @JoinColumn(name = COLUMN_SPECIALIZATION_UNIT) private BudgetSpecializationUnit specializationUnit;
