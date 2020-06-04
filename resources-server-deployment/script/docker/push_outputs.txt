@@ -1,0 +1,22 @@
+Publishing with time stamp : 202006021659 
+The push refers to repository [10.3.4.18:5000/mic-resources-api]
+be6a2748d06e: Preparing
+13f0b213c32d: Preparing
+849cb74592b3: Preparing
+f1b5933fe4b5: Preparing
+849cb74592b3: Mounted from mic-collectif-api
+13f0b213c32d: Mounted from mic-collectif-api
+f1b5933fe4b5: Mounted from mic-collectif-api
+be6a2748d06e: Pushed
+202006021659: digest: sha256:4fba2ccfd9161093c05d07f118b00d2f7e1caed42dfe2e625b7e6ac1055c22c7 size: 1164
+Publishing with time stamp : 202006031041 
+The push refers to repository [10.3.4.18:5000/mic-resources-api]
+e5f49d9bda42: Preparing
+13f0b213c32d: Preparing
+849cb74592b3: Preparing
+f1b5933fe4b5: Preparing
+13f0b213c32d: Layer already exists
+f1b5933fe4b5: Layer already exists
+849cb74592b3: Layer already exists
+e5f49d9bda42: Pushed
+202006031041: digest: sha256:6a3185b59b59294868f28ec49a2ae02b06414f7aee8484d8be7b863fd75c5243 size: 1164

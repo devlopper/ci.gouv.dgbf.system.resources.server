@@ -16,7 +16,7 @@
 	
 	<properties>
 		<cyk.variable.system.identifier>resources</cyk.variable.system.identifier>
-		<cyk.variable.system.name>resources</cyk.variable.system.name>
+		<cyk.variable.system.name>Gestion des resources</cyk.variable.system.name>
 		<cyk.variable.system.version>0.1</cyk.variable.system.version>
 		
 		<cyk.variable.system.logging.throwable.print.stack.trace>true</cyk.variable.system.logging.throwable.print.stack.trace>

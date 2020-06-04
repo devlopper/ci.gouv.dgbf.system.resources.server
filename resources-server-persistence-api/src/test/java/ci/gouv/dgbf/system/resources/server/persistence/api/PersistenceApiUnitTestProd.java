@@ -16,7 +16,7 @@ import ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializ
 import ci.gouv.dgbf.system.resources.server.persistence.entities.EconomicNature;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.Section;
 
-public class PersistenceApiUnitTestDev extends AbstractPersistenceUnitTest {
+public class PersistenceApiUnitTestProd extends AbstractPersistenceUnitTest {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -29,7 +29,7 @@ public class PersistenceApiUnitTestDev extends AbstractPersistenceUnitTest {
 	
 	@Override
 	protected String getPersistenceUnitName() {
-		return "dev";
+		return "prod";
 	}
 	
 	@Test
@@ -47,7 +47,7 @@ public class PersistenceApiUnitTestDev extends AbstractPersistenceUnitTest {
 				);
 		if(CollectionHelper.isNotEmpty(sections))
 			sections.forEach(section -> {
-				System.out.println(section);
+				System.out.println(section+" : "+section.getAmounts());
 			});
 	}
 }

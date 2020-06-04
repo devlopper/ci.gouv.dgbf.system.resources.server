@@ -30,5 +30,5 @@ public class EconomicNature extends AbstractIdentifiableSystemScalarStringIdenti
 		return (EconomicNature) super.setName(name);
 	}
 	
-	public static final String TABLE_NAME = "nature_economique";	
+	public static final String TABLE_NAME = "NATURE_ECONOMIQUE";	
 }
