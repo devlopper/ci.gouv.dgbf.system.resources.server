@@ -44,10 +44,10 @@
 	</dependencies>
 	
 	<repositories>
-	    <repository>
-	        <id>cyk</id>
-	        <url>https://rawgit.com/devlopper/artifact.maven/master</url>
-	    </repository>
+		<repository>
+			<id>cyk.repo.repsy.io</id>
+			<url>https://repo.repsy.io/mvn/kycdev/default</url>
+		</repository>
 	</repositories>
 	
 </project>
