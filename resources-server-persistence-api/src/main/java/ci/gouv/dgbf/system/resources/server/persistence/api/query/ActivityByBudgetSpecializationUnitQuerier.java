@@ -38,13 +38,14 @@ public interface ActivityByBudgetSpecializationUnitQuerier extends ByDimensionOn
 			Activity.FIELD_IDENTIFIER,Activity.FIELD_CODE,Activity.FIELD_NAME);
 	String QUERY_VALUE_READ_AGGREGATION_BY_BUDGET_SPECIALIZATION_UNITS_CODES_BY_BUDGETARY_ACT_VERSION_CODE_SELECT_FROM = 
 			"SELECT t.identifier,t.code,t.name"
-			+","+ResourceQuerier.deriveSums("resource")
-			+" FROM Activity t ";
+			+","+ResourceQuerier.deriveSums("resource")	
+			+" FROM Activity t "
+			+" LEFT JOIN Budget budget ON budget.specializationUnit.identifier = t.budgetSpecializationUnit.identifier "	
+			+" LEFT JOIN BudgetaryActVersion budgetaryActVersion ON budgetaryActVersion.identifier = budget.actVersion.identifier AND budgetaryActVersion.code = :"+PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE+" ";
 	String QUERY_VALUE_READ_AGGREGATION_BY_BUDGET_SPECIALIZATION_UNITS_CODES_BY_BUDGETARY_ACT_VERSION_CODE = 
 			QUERY_VALUE_READ_AGGREGATION_BY_BUDGET_SPECIALIZATION_UNITS_CODES_BY_BUDGETARY_ACT_VERSION_CODE_SELECT_FROM
 			+" LEFT JOIN Resource resource ON resource.activity.identifier = t.identifier"
 			+" WHERE t.budgetSpecializationUnit.code IN :"+PARAMETER_NAME_BUDGET_SPECIALIZATION_UNITS_CODES			
-			+" AND resource.budget.actVersion.code = :"+PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE+" "			
 			+" GROUP BY t.identifier,t.code,t.name"
 			+" ORDER BY t.code ASC";
 	

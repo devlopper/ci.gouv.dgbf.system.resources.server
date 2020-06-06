@@ -45,13 +45,14 @@ public interface BudgetSpecializationUnitCategoryQuerier extends Querier {
 	String QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM = 
 			"SELECT t.identifier,t.code,t.name,"+ResourceQuerier.deriveSums("resource")
 			+" FROM BudgetSpecializationUnitCategory t"
-			+" LEFT JOIN BudgetSpecializationUnit budgetSpecializationUnit ON budgetSpecializationUnit.category.identifier = t.identifier "
+			+" LEFT JOIN BudgetSpecializationUnit budgetSpecializationUnit ON budgetSpecializationUnit.category.identifier = t.identifier "		
+			+" LEFT JOIN Budget budget ON budget.specializationUnit.identifier = budgetSpecializationUnit.identifier "	
+			+" LEFT JOIN BudgetaryActVersion budgetaryActVersion ON budgetaryActVersion.identifier = budget.actVersion.identifier AND budgetaryActVersion.code = :"+PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE+" "
 			+" LEFT JOIN Activity activity ON activity.budgetSpecializationUnit.identifier = budgetSpecializationUnit.identifier"
 			+" LEFT JOIN Resource resource ON resource.activity.identifier = activity.identifier"
 			;
 	String QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING = 
 			QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM
-			+" WHERE resource.budget.actVersion.code = :"+PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE+" "			
 			+" GROUP BY t.identifier,t.code,t.name "
 			+" ORDER BY t.code ASC"
 			;
@@ -61,7 +62,6 @@ public interface BudgetSpecializationUnitCategoryQuerier extends Querier {
 	String QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_BY_SECTIONS_CODES_ORDER_BY_CODE_ASCENDING = 
 			QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM
 			+" WHERE activity.budgetSpecializationUnit.section.code IN :"+PARAMETER_NAME_SECTIONS_CODES			
-			+" AND resource.budget.actVersion.code = :"+PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE+" "				
 			+" GROUP BY t.identifier,t.code,t.name "
 			+" ORDER BY t.code ASC"
 			;
@@ -72,7 +72,6 @@ public interface BudgetSpecializationUnitCategoryQuerier extends Querier {
 			QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM
 			+" WHERE activity.budgetSpecializationUnit.section.code IN :"+PARAMETER_NAME_SECTIONS_CODES
 			+" AND activity.budgetSpecializationUnit.category.type.code IN :"+PARAMETER_NAME_TYPES_CODES			
-			+" AND resource.budget.actVersion.code = :"+PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE+" "				
 			+" GROUP BY t.identifier,t.code,t.name "
 			+" ORDER BY t.code ASC"
 			;

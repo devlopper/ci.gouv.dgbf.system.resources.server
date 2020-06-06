@@ -41,8 +41,9 @@ public interface SectionQuerier extends Querier {
 			+" FROM Section t "
 			+" LEFT JOIN BudgetSpecializationUnit budgetSpecializationUnit ON budgetSpecializationUnit.section.identifier = t.identifier "
 			+" LEFT JOIN Activity activity ON activity.budgetSpecializationUnit.identifier = budgetSpecializationUnit.identifier "
-			+" LEFT JOIN Resource resource ON resource.activity.identifier = activity.identifier "						
-			+" WHERE resource.budget.actVersion.code = :"+PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE+" "			
+			+" LEFT JOIN Resource resource ON resource.activity.identifier = activity.identifier "	
+			+" LEFT JOIN Budget budget ON budget.specializationUnit.identifier = budgetSpecializationUnit.identifier "	
+			+" LEFT JOIN BudgetaryActVersion budgetaryActVersion ON budgetaryActVersion.identifier = budget.actVersion.identifier AND budgetaryActVersion.code = :"+PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE+" "	
 			+" GROUP BY t.identifier,t.code,t.name "
 			+" ORDER BY t.code ASC"
 			;
