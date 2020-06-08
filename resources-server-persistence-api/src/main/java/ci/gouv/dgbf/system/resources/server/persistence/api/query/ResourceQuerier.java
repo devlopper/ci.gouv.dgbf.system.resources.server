@@ -112,6 +112,18 @@ public interface ResourceQuerier extends Querier {
 	String QUERY_IDENTIFIER_COUNT_VIEW_01 = QueryIdentifierBuilder.getInstance().build(Resource.class, QUERY_NAME_COUNT_VIEW_01);
 	String QUERY_VALUE_COUNT_VIEW_01 = "SELECT COUNT(t.identifier) FROM Resource t "+ QUERY_VALUE_READ_VIEW_01_WHERE;
 	
+	/* View 02 */
+	/**
+	 * fields names : identifier,economic nature(code concatenate to name),initial
+	 */
+	String QUERY_NAME_READ_VIEW_02 = "read.view.02";
+	String QUERY_IDENTIFIER_READ_VIEW_02 = QueryIdentifierBuilder.getInstance().build(Resource.class, QUERY_NAME_READ_VIEW_02);
+	Map<String,Integer> QUERY_VALUE_READ_VIEW_02_TUPLE_FIELDS_NAMES_INDEXES = deriveSumsTupleFieldsNamesIndexes(Resource.FIELD_IDENTIFIER,Resource.FIELD_ECONOMIC_NATURE_AS_STRING);
+	String QUERY_VALUE_READ_VIEW_02_SELECT_FROM = "SELECT t.identifier,"
+			+QueryValueBuilder.deriveConcatsCodeAndNameFromTuplesNames(Resource.FIELD_ECONOMIC_NATURE)+","+deriveColumns("t")
+			+ " FROM Resource t "
+			+QueryValueBuilder.deriveLeftJoinsFromFieldsNames("t",Resource.FIELD_ECONOMIC_NATURE);
+	
 	/* All 01 */
 	String QUERY_NAME_READ_ALL_01 = "read.all.01";
 	String QUERY_IDENTIFIER_READ_ALL_01 = QueryIdentifierBuilder.getInstance().build(Resource.class, QUERY_NAME_READ_ALL_01);

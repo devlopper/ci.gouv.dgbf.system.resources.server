@@ -1,1 +1,1 @@
-docker run -p 8080:8080 resources-server:latest
+docker run -p 8080:8080 mic-resources-api:latest

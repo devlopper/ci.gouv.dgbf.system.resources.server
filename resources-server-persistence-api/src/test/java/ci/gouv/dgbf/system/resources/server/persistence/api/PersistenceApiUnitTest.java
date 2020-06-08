@@ -11,6 +11,7 @@ import org.cyk.utility.__kernel__.variable.VariableHelper;
 import org.cyk.utility.__kernel__.variable.VariableName;
 import org.junit.jupiter.api.Test;
 
+import ci.gouv.dgbf.system.resources.server.persistence.api.query.ResourceByActivityQuerier;
 import ci.gouv.dgbf.system.resources.server.persistence.api.query.ResourceQuerier;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.Activity;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.Budget;
@@ -29,6 +30,26 @@ public class PersistenceApiUnitTest extends AbstractPersistenceUnitTest {
 	@Override
 	protected String getPersistenceUnitName() {
 		return "default";
+	}
+	
+	@Test
+	public void resourceByActivityQuerier_readByActivitiesCodesByBudgetaryActVersionCode_value(){
+		assertThat(ResourceByActivityQuerier.QUERY_VALUE_READ_BY_ACTIVITIES_CODES_BY_BUDGETARY_ACT_VERSION_CODE)
+		.isEqualTo("SELECT t.identifier,CONCAT(economicNature.code,' ',economicNature.name),CASE WHEN t.amounts.initial IS NULL THEN 0l ELSE t.amounts.initial END "
+				+ "FROM Resource t "
+				+ "LEFT JOIN t.economicNature economicNature "
+				+ "WHERE t.activity.code IN :activitiesCodes AND t.budget.actVersion.code = :budgetaryActVersionCode "
+				+ "ORDER BY t.activity.code ASC,t.economicNature.code DESC");
+	}
+	
+	@Test
+	public void resourceByActivityQuerier_readByActivityCodeByBudgetaryActVersionCode_value(){
+		assertThat(ResourceByActivityQuerier.QUERY_VALUE_READ_BY_ACTIVITY_CODE_BY_BUDGETARY_ACT_VERSION_CODE)
+		.isEqualTo("SELECT t.identifier,CONCAT(economicNature.code,' ',economicNature.name),CASE WHEN t.amounts.initial IS NULL THEN 0l ELSE t.amounts.initial END "
+				+ "FROM Resource t "
+				+ "LEFT JOIN t.economicNature economicNature "
+				+ "WHERE t.activity.code = :activityCode AND t.budget.actVersion.code = :budgetaryActVersionCode "
+				+ "ORDER BY t.activity.code ASC,t.economicNature.code DESC");
 	}
 	
 	@Test
