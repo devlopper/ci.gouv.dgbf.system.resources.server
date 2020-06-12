@@ -1,9 +1,11 @@
 package ci.gouv.dgbf.system.resources.server.persistence.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +16,9 @@ import lombok.experimental.Accessors;
 @Entity @Table(name=Section.TABLE_NAME)
 public class Section extends AbstractNamableWithTransientAmounts implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Transient private Collection<BudgetSpecializationUnitCategory> budgetSpecializationUnitCategories;
+	@Transient private Collection<BudgetSpecializationUnit> budgetSpecializationUnits;
 	
 	@Override
 	public Section setIdentifier(String identifier) {

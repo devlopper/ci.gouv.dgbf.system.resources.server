@@ -1,6 +1,7 @@
 package ci.gouv.dgbf.system.resources.server.representation.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,9 +12,6 @@ import lombok.experimental.Accessors;
 public class SectionDto extends AbstractNamableWithAmountsDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Override
-	public SectionDto setIdentifier(String identifier) {
-		return (SectionDto) super.setIdentifier(identifier);
-	}
-
+	private ArrayList<BudgetSpecializationUnitCategoryDto> budgetSpecializationUnitCategories;
+	private ArrayList<BudgetSpecializationUnitDto> budgetSpecializationUnits;
 }

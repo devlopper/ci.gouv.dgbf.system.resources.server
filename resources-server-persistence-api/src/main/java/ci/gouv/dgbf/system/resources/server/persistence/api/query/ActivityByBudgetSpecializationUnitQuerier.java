@@ -35,9 +35,9 @@ public interface ActivityByBudgetSpecializationUnitQuerier extends ByDimensionOn
 	String QUERY_NAME_READ_AGGREGATION_BY_BUDGET_SPECIALIZATION_UNITS_CODES_BY_BUDGETARY_ACT_VERSION_CODE = "readAggregationByBudgetSpecializationUnitsCodesByBudgetaryActVersionCode";
 	String QUERY_IDENTIFIER_READ_AGGREGATION_BY_BUDGET_SPECIALIZATION_UNITS_CODES_BY_BUDGETARY_ACT_VERSION_CODE = QueryIdentifierBuilder.getInstance().build(Activity.class, QUERY_NAME_READ_AGGREGATION_BY_BUDGET_SPECIALIZATION_UNITS_CODES_BY_BUDGETARY_ACT_VERSION_CODE);
 	Map<String,Integer> QUERY_VALUE_READ_AGGREGATION_BY_BUDGET_SPECIALIZATION_UNITS_CODES_BY_BUDGETARY_ACT_VERSION_CODE_INDEXES = ResourceQuerier.deriveSumsTupleFieldsNamesIndexes(
-			Activity.FIELD_IDENTIFIER,Activity.FIELD_CODE,Activity.FIELD_NAME);
+			Activity.FIELD_IDENTIFIER,Activity.FIELD_CODE,Activity.FIELD_NAME,Activity.FIELD_BUDGET_SPECIALIZATION_UNIT_IDENTIFIER);
 	String QUERY_VALUE_READ_AGGREGATION_BY_BUDGET_SPECIALIZATION_UNITS_CODES_BY_BUDGETARY_ACT_VERSION_CODE_SELECT_FROM = 
-			"SELECT t.identifier,t.code,t.name"
+			"SELECT t.identifier,t.code,t.name,t.budgetSpecializationUnit.identifier"
 			+","+ResourceQuerier.deriveSums("resource")	
 			+" FROM Activity t "
 			+" LEFT JOIN Budget budget ON budget.specializationUnit.identifier = t.budgetSpecializationUnit.identifier "	
@@ -46,7 +46,7 @@ public interface ActivityByBudgetSpecializationUnitQuerier extends ByDimensionOn
 			QUERY_VALUE_READ_AGGREGATION_BY_BUDGET_SPECIALIZATION_UNITS_CODES_BY_BUDGETARY_ACT_VERSION_CODE_SELECT_FROM
 			+" LEFT JOIN Resource resource ON resource.activity.identifier = t.identifier"
 			+" WHERE t.budgetSpecializationUnit.code IN :"+PARAMETER_NAME_BUDGET_SPECIALIZATION_UNITS_CODES			
-			+" GROUP BY t.identifier,t.code,t.name"
+			+" GROUP BY t.identifier,t.code,t.name,t.budgetSpecializationUnit.identifier"
 			+" ORDER BY t.code ASC";
 	
 	static void initialize() {

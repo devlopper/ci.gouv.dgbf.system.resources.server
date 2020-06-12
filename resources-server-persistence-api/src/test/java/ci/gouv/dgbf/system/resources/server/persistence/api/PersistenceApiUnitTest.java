@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import ci.gouv.dgbf.system.resources.server.persistence.api.query.ResourceByActivityQuerier;
 import ci.gouv.dgbf.system.resources.server.persistence.api.query.ResourceQuerier;
+import ci.gouv.dgbf.system.resources.server.persistence.api.query.SectionQuerier;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.Activity;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.Budget;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnit;
@@ -63,9 +64,11 @@ public class PersistenceApiUnitTest extends AbstractPersistenceUnitTest {
 		});
 	}
 	
-	@Test
-	public void section_readAggregationOrderByCodeAscending(){
-		
+	//@Test
+	public void section_readAggregationOrderByCodeAscending_countIsEqualTo_readAggregationByBudgetaryActVersionCodeOrderByCodeAscending_versionIs2020_1(){
+		Integer numberOfSections = CollectionHelper.getSize(SectionQuerier.getInstance().readOrderByCodeAscending());
+		assertThat(numberOfSections).as("number of sections is "+numberOfSections)
+		.isEqualTo(CollectionHelper.getSize(SectionQuerier.getInstance().readAggregationByBudgetaryActVersionCodeOrderByCodeAscending("2020_1"))); 
 	}
 	
 	@Override
@@ -92,7 +95,7 @@ public class PersistenceApiUnitTest extends AbstractPersistenceUnitTest {
 		EntityCreator.getInstance().createManyInTransaction(new BudgetaryAct().setCode("2020").setName("2020").setYear("2020")
 				,new BudgetaryAct().setCode("2021").setName("2021").setYear("2021"));
 		
-		EntityCreator.getInstance().createManyInTransaction(new BudgetaryActVersion().setCode("2020_1").setName("2020_1").setBudgetaryActFromIdentifier("2020")
+		EntityCreator.getInstance().createManyInTransaction(new BudgetaryActVersion().setIdentifier("2020_1").setCode("2020_1").setName("2020_1").setBudgetaryActFromIdentifier("2020")
 				,new BudgetaryActVersion().setCode("2020_2").setName("2020_2").setBudgetaryActFromIdentifier("2020")
 				,new BudgetaryActVersion().setCode("2021_1").setName("2021_1").setBudgetaryActFromIdentifier("2021"));
 		

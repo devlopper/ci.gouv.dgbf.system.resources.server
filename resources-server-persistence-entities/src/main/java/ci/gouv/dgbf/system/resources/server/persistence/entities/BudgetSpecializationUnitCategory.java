@@ -1,11 +1,13 @@
 package ci.gouv.dgbf.system.resources.server.persistence.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.cyk.utility.__kernel__.persistence.query.EntityFinder;
 import org.cyk.utility.__kernel__.string.StringHelper;
@@ -21,6 +23,9 @@ public class BudgetSpecializationUnitCategory extends AbstractNamableWithTransie
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne @JoinColumn(name = COLUMN_TYPE) private BudgetSpecializationUnitType type;
+	
+	@Transient private String sectionIdentifier;
+	@Transient private Collection<BudgetSpecializationUnit> budgetSpecializationUnits;
 	
 	@Override
 	public BudgetSpecializationUnitCategory setIdentifier(String identifier) {
@@ -45,6 +50,7 @@ public class BudgetSpecializationUnitCategory extends AbstractNamableWithTransie
 	}
 	
 	public static final String FIELD_TYPE = "type";
+	public static final String FIELD_SECTION_IDENTIFIER = "sectionIdentifier";
 	
 	public static final String COLUMN_TYPE = "TYPE";
 	

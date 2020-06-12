@@ -42,17 +42,22 @@ public interface BudgetSpecializationUnitCategoryQuerier extends Querier {
 	String QUERY_IDENTIFIER_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING = QueryIdentifierBuilder.getInstance().build(BudgetSpecializationUnitCategory.class, QUERY_NAME_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING);
 	Map<String,Integer> QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_TUPLE_FIELDS_NAMES_INDEXES = ResourceQuerier.deriveSumsTupleFieldsNamesIndexes(
 			BudgetSpecializationUnitCategory.FIELD_IDENTIFIER,BudgetSpecializationUnitCategory.FIELD_CODE,BudgetSpecializationUnitCategory.FIELD_NAME);
-	String QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM = 
-			"SELECT t.identifier,t.code,t.name,"+ResourceQuerier.deriveSums("resource")
+	String QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM_FORMAT = 
+			"SELECT %s,"+ResourceQuerier.deriveSums("resource")
 			+" FROM BudgetSpecializationUnitCategory t"
-			+" LEFT JOIN BudgetSpecializationUnit budgetSpecializationUnit ON budgetSpecializationUnit.category.identifier = t.identifier "		
-			+" LEFT JOIN Budget budget ON budget.specializationUnit.identifier = budgetSpecializationUnit.identifier "	
-			+" LEFT JOIN BudgetaryActVersion budgetaryActVersion ON budgetaryActVersion.identifier = budget.actVersion.identifier AND budgetaryActVersion.code = :"+PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE+" "
-			+" LEFT JOIN Activity activity ON activity.budgetSpecializationUnit.identifier = budgetSpecializationUnit.identifier"
-			+" LEFT JOIN Resource resource ON resource.activity.identifier = activity.identifier"
+			+" INNER JOIN BudgetSpecializationUnit budgetSpecializationUnit ON budgetSpecializationUnit.category.identifier = t.identifier "		
+			+" INNER JOIN Activity activity ON activity.budgetSpecializationUnit.identifier = budgetSpecializationUnit.identifier"
+			+" INNER JOIN Resource resource ON resource.activity.identifier = activity.identifier"
 			;
-	String QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING = 
+	String QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM = 
+			String.format(QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM_FORMAT, "t.identifier,t.code,t.name");
+			
+	String QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM_WHERE = 
 			QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM
+			+" WHERE resource.budget.actVersion.code = :"+PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE+" ";
+			
+	String QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING = 
+			QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM_WHERE
 			+" GROUP BY t.identifier,t.code,t.name "
 			+" ORDER BY t.code ASC"
 			;
@@ -60,19 +65,23 @@ public interface BudgetSpecializationUnitCategoryQuerier extends Querier {
 	String QUERY_NAME_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_BY_SECTIONS_CODES_ORDER_BY_CODE_ASCENDING = "readAggregationBySectionsCodesByBudgetaryActVersionCodeOrderByCodeAscending";
 	String QUERY_IDENTIFIER_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_BY_SECTIONS_CODES_ORDER_BY_CODE_ASCENDING = QueryIdentifierBuilder.getInstance().build(BudgetSpecializationUnitCategory.class, QUERY_NAME_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_BY_SECTIONS_CODES_ORDER_BY_CODE_ASCENDING);
 	String QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_BY_SECTIONS_CODES_ORDER_BY_CODE_ASCENDING = 
-			QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM
-			+" WHERE activity.budgetSpecializationUnit.section.code IN :"+PARAMETER_NAME_SECTIONS_CODES			
+			QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM_WHERE
+			+" AND activity.budgetSpecializationUnit.section.code IN :"+PARAMETER_NAME_SECTIONS_CODES			
 			+" GROUP BY t.identifier,t.code,t.name "
 			+" ORDER BY t.code ASC"
 			;
 	
 	String QUERY_NAME_READ_AGGREGATION_BY_SECTIONS_CODES_BY_TYPES_CODES_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING = "readAggregationOrderAscendingBySectionsCodesByTypesCodesByBudgetaryActVersionCode";
 	String QUERY_IDENTIFIER_READ_AGGREGATION_BY_SECTIONS_CODES_BY_TYPES_CODES_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING = QueryIdentifierBuilder.getInstance().build(BudgetSpecializationUnitCategory.class, QUERY_NAME_READ_AGGREGATION_BY_SECTIONS_CODES_BY_TYPES_CODES_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING);
+	Map<String,Integer> QUERY_VALUE_READ_AGGREGATION_BY_SECTIONS_CODES_BY_TYPES_CODES_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_TUPLE_FIELDS_NAMES_INDEXES = ResourceQuerier.deriveSumsTupleFieldsNamesIndexes(
+			BudgetSpecializationUnitCategory.FIELD_IDENTIFIER,BudgetSpecializationUnitCategory.FIELD_CODE,BudgetSpecializationUnitCategory.FIELD_NAME
+			,BudgetSpecializationUnitCategory.FIELD_SECTION_IDENTIFIER);
 	String QUERY_VALUE_READ_AGGREGATION_BY_SECTIONS_CODES_BY_TYPES_CODES_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING = 
-			QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM
-			+" WHERE activity.budgetSpecializationUnit.section.code IN :"+PARAMETER_NAME_SECTIONS_CODES
+			String.format(QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_SELECT_FROM_FORMAT, "t.identifier,t.code,t.name,budgetSpecializationUnit.section.code")
+			+" WHERE resource.budget.actVersion.code = :"+PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE
+			+" AND budgetSpecializationUnit.section.code IN :"+PARAMETER_NAME_SECTIONS_CODES
 			+" AND activity.budgetSpecializationUnit.category.type.code IN :"+PARAMETER_NAME_TYPES_CODES			
-			+" GROUP BY t.identifier,t.code,t.name "
+			+" GROUP BY t.identifier,t.code,t.name,budgetSpecializationUnit.section.code "
 			+" ORDER BY t.code ASC"
 			;
 	
@@ -92,7 +101,7 @@ public interface BudgetSpecializationUnitCategoryQuerier extends Querier {
 		QueryHelper.addQueries(Query.build(Query.FIELD_IDENTIFIER,BudgetSpecializationUnitCategoryQuerier.QUERY_IDENTIFIER_READ_AGGREGATION_BY_SECTIONS_CODES_BY_TYPES_CODES_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING
 				,Query.FIELD_TUPLE_CLASS,BudgetSpecializationUnitCategory.class,Query.FIELD_RESULT_CLASS,BudgetSpecializationUnitCategory.class
 				,Query.FIELD_VALUE,QUERY_VALUE_READ_AGGREGATION_BY_SECTIONS_CODES_BY_TYPES_CODES_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING
-				).setTupleFieldsNamesIndexes(QUERY_VALUE_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_TUPLE_FIELDS_NAMES_INDEXES)
+				).setTupleFieldsNamesIndexes(QUERY_VALUE_READ_AGGREGATION_BY_SECTIONS_CODES_BY_TYPES_CODES_BY_BUDGETARY_ACT_VERSION_CODE_ORDER_BY_CODE_ASCENDING_TUPLE_FIELDS_NAMES_INDEXES)
 			);
 	}
 }

@@ -1,6 +1,7 @@
 package ci.gouv.dgbf.system.resources.server.representation.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,5 +14,5 @@ public class BudgetSpecializationUnitDto extends AbstractNamableWithAmountsDto i
 	
 	private SectionDto section;
 	private BudgetSpecializationUnitCategoryDto category;
-
+	private ArrayList<ActivityDto> activities;
 }
