@@ -4,6 +4,10 @@
     	<jta-data-source>${data.source.jndi.name}</jta-data-source>
     	
     	<!-- Read -->
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.FundingSource</class>
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Lessor</class>
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.FundingSourceLessor</class>
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Funding</class>	
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Section</class>
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitType</class>
     	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitCategory</class>		
@@ -13,6 +17,7 @@
     	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Budget</class>
     	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.EconomicNature</class>
     	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Activity</class>
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Expenditure</class>
     	
     	<!-- Transaction -->    	
     	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Resource</class>

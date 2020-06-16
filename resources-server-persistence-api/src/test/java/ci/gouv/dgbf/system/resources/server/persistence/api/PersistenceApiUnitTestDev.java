@@ -1,21 +1,24 @@
 package ci.gouv.dgbf.system.resources.server.persistence.api;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
 import org.cyk.utility.__kernel__.collection.CollectionHelper;
+import org.cyk.utility.__kernel__.klass.PersistableClassesGetter;
 import org.cyk.utility.__kernel__.persistence.query.EntityReader;
 import org.cyk.utility.__kernel__.persistence.query.Query;
 import org.cyk.utility.__kernel__.persistence.query.QueryExecutorArguments;
 import org.cyk.utility.__kernel__.test.weld.AbstractPersistenceUnitTest;
 import org.junit.jupiter.api.Test;
 
+import ci.gouv.dgbf.system.resources.server.persistence.api.query.EconomicNatureQuerier;
 import ci.gouv.dgbf.system.resources.server.persistence.api.query.SectionQuerier;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.Activity;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnit;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitCategory;
-import ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitType;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.EconomicNature;
+import ci.gouv.dgbf.system.resources.server.persistence.entities.FundingSource;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.Resource;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.Section;
 
@@ -35,11 +38,12 @@ public class PersistenceApiUnitTestDev extends AbstractPersistenceUnitTest {
 		return "dev";
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void run(){
-		assertCountIsGreaterThanZero(Section.class,BudgetSpecializationUnitType.class,BudgetSpecializationUnitCategory.class
-				,BudgetSpecializationUnit.class,Activity.class,EconomicNature.class);
+		//assertCountIsGreaterThanZero((Collection<Class<?>>) PersistableClassesGetter.COLLECTION.get());
 		printSections();
+		printEconomicNatures();
 	}
 	
 	public void printSections(){
@@ -90,5 +94,26 @@ public class PersistenceApiUnitTestDev extends AbstractPersistenceUnitTest {
 					}
 				}
 			});
+	}
+
+	public void printEconomicNatures(){
+		printReadAggregationByFundingSourcesCodesOrderByCodeAscending("0101",FundingSource.CODE_DON);
+		printReadAggregationByFundingSourcesCodesOrderByCodeAscending("0101",FundingSource.CODE_EMPRUNT);
+	}
+	
+	public void printReadAggregationByFundingSourcesCodesOrderByCodeAscending(String budgetaryActVersionCode,String...fundingSourcesCodes) {
+		System.out.println(StringUtils.repeat("-", 20)+" Economic nature aggregation : "+Arrays.toString(fundingSourcesCodes)+StringUtils.repeat("-", 20));
+		Collection<EconomicNature> economicNatures = EntityReader.getInstance().readMany(EconomicNature.class, EconomicNatureQuerier.QUERY_IDENTIFIER_READ_AGGREGATION_BY_BUDGETARY_ACT_VERSION_CODE_BY_FUNDING_SOURCES_CODES_ORDER_BY_CODE_ASCENDING
+				, EconomicNatureQuerier.PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE,budgetaryActVersionCode
+				, EconomicNatureQuerier.PARAMETER_NAME_FUNDING_SOURCES_CODES,CollectionHelper.listOf(fundingSourcesCodes)
+			);
+		if(CollectionHelper.isNotEmpty(economicNatures))
+			for(String fundingSourcesCode : fundingSourcesCodes) {
+				System.out.println("\tSource de financement : "+fundingSourcesCode);
+				System.out.println("\t\tNatures économiques");
+				economicNatures.forEach(economicNature -> {
+					System.out.println("\t\t"+economicNature.getIdentifier()+" : "+economicNature.getAmount());
+				});
+			}
 	}
 }

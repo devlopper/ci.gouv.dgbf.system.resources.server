@@ -26,6 +26,7 @@ public class Activity extends AbstractNamableWithTransientAmounts implements Ser
 	
 	@Transient private Collection<Resource> resources;
 	@Transient private String budgetSpecializationUnitIdentifier;
+	@Transient private BudgetaryActVersion budgetaryActVersion;
 	
 	@Override
 	public Activity setIdentifier(String identifier) {
@@ -55,4 +56,6 @@ public class Activity extends AbstractNamableWithTransientAmounts implements Ser
 	public static final String COLUMN_BUDGET_SPECIALIZATION_UNIT = "USB";
 	
 	public static final String TABLE_NAME = "ACTIVITE";	
+	
+	public static final String CODE_RECETTES_EXTERIEURES = "03001001001";
 }

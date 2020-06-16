@@ -82,5 +82,5 @@ public class Resource extends AbstractIdentifiableSystemScalarStringImpl impleme
 	public static final String COLUMN_ECONOMIC_NATURE = "REC_NATURE_ECO_ID";
 	public static final String COLUMN_AMOUNT = "REC_MONTANT";
 	
-	public static final String TABLE_NAME = "ligne_recette";	
+	public static final String TABLE_NAME = "LIGNE_RECETTE";	
 }

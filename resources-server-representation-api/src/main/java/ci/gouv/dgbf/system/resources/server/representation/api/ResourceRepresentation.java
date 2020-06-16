@@ -28,6 +28,6 @@ public interface ResourceRepresentation extends RepresentationEntity<ResourceDto
 		return ProxyGetter.getInstance().get(ResourceRepresentation.class);
 	}
 	
-	String PATH_SAVE_INITIAL = "saveInitials";	
-	String PATH = "resource";	
+	String PATH = "resource";
+	String PATH_SAVE_INITIAL = "saveInitials";
 }

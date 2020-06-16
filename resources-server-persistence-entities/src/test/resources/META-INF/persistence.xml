@@ -5,6 +5,10 @@
 
 	<persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
 		<!-- Read -->
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.FundingSource</class>
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Lessor</class>
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.FundingSourceLessor</class>
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Funding</class>		
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Section</class>
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitType</class>
     	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitCategory</class>		

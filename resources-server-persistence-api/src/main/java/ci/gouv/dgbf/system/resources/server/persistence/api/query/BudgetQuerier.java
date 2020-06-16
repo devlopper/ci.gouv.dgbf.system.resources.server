@@ -24,7 +24,7 @@ public interface BudgetQuerier extends Querier {
 	public static abstract class AbstractImpl extends AbstractObject implements BudgetQuerier,Serializable {
 		
 		public Budget readBySpecializationUnitCodeByActVersionCode(String specializationUnitCode,String actVersionCode) {
-			return QueryExecutor.getInstance().executeReadOne(Budget.class, new QueryExecutorArguments().setQuery(QueryGetter.getInstance().get(""))
+			return QueryExecutor.getInstance().executeReadOne(Budget.class, new QueryExecutorArguments().setQuery(QueryGetter.getInstance().get(QUERY_IDENTIFIER_READ_BY_SPECIALIZATION_UNIT_CODE_BY_ACT_VERSION_CODE))
 					.addFilterField(PARAMETER_NAME_SPECIALIZATION_UNIT_CODE, specializationUnitCode).addFilterField(PARAMETER_NAME_ACT_VERSION_CODE, actVersionCode));
 		}
 		

@@ -136,7 +136,13 @@ public interface SectionQuerier extends Querier {
 								section.getBudgetSpecializationUnitCategories().add(index);
 							}
 						CollectionHelper.sortByBusinessIdentifier((List<BudgetSpecializationUnitCategory>) section.getBudgetSpecializationUnitCategories());
-					});
+						BudgetSpecializationUnitCategory total = new BudgetSpecializationUnitCategory();
+						total.setCode("Recettes de l'État");
+						section.getBudgetSpecializationUnitCategories().forEach(budgetSpecializationUnitCategory -> {
+							total.getAmounts(Boolean.TRUE).increment(budgetSpecializationUnitCategory.getAmounts());
+						});
+						CollectionHelper.addElementAt(section.getBudgetSpecializationUnitCategories(), 4, total);
+					});				
 			}
 		}
 		
@@ -151,14 +157,16 @@ public interface SectionQuerier extends Querier {
 							.filter(budgetSpecializationUnit -> section.getIdentifier().equals(budgetSpecializationUnit.getSectionIdentifier())).collect(Collectors.toList()));
 				});
 			}
+			
+			Collection<BudgetSpecializationUnit> all = null;
 			if(Boolean.TRUE.equals(isGetAll)) {
-				Collection<BudgetSpecializationUnit> all = EntityReader.getInstance().readMany(BudgetSpecializationUnit.class
+				all = EntityReader.getInstance().readMany(BudgetSpecializationUnit.class
 						,BudgetSpecializationUnitBySectionQuerier.QUERY_IDENTIFIER_READ_BY_SECTIONS_CODES_BY_TYPES_CODES
 						,BudgetSpecializationUnitBySectionQuerier.PARAMETER_NAME_SECTIONS_CODES,codes
 						,BudgetSpecializationUnitBySectionQuerier.PARAMETER_NAME_TYPES_CODES,List.of(BudgetSpecializationUnitType.CODE_RESOURCE)
 						);
 				if(CollectionHelper.isNotEmpty(all))
-					sections.forEach(section -> {
+					for(Section section : sections) {
 						if(section.getBudgetSpecializationUnits() == null)
 							section.setBudgetSpecializationUnits(new ArrayList<>());
 						for(BudgetSpecializationUnit index : all)
@@ -166,11 +174,14 @@ public interface SectionQuerier extends Querier {
 								section.getBudgetSpecializationUnits().add(index);
 							}
 						CollectionHelper.sortByBusinessIdentifier((List<BudgetSpecializationUnit>) section.getBudgetSpecializationUnits());
-					});
+					}
+				all = new ArrayList<>();
+				for(Section section : sections)
+					all.addAll(section.getBudgetSpecializationUnits());
 			}
 			if(CollectionHelper.isNotEmpty(budgetSpecializationUnits) && Boolean.TRUE.equals(isGetTree)) {
-				Collection<String> budgetSpecializationUnitsCodes = CollectionHelper.cast(String.class,FieldHelper.readBusinessIdentifiers(budgetSpecializationUnits));
-				readActivities(budgetSpecializationUnits, budgetSpecializationUnitsCodes, budgetaryActVersionCode, isGetAll);
+				Collection<String> budgetSpecializationUnitsCodes = CollectionHelper.cast(String.class,FieldHelper.readBusinessIdentifiers(all));
+				readActivities(all, budgetSpecializationUnitsCodes, budgetaryActVersionCode, isGetAll);
 			}
 		}
 		

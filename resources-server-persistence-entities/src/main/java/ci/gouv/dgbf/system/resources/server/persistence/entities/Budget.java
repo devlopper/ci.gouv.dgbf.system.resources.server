@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.cyk.utility.__kernel__.persistence.query.EntityFinder;
+import org.cyk.utility.__kernel__.string.StringHelper;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,6 +38,20 @@ public class Budget extends AbstractIdentifiableBusinessWithTransientAmounts imp
 	@Override
 	public Budget setCode(String code) {
 		return (Budget) super.setCode(code);
+	}
+	
+	public Budget setSpecializationUnitFromIdentifier(String identifier) {
+		if(StringHelper.isBlank(identifier))
+			setSpecializationUnit(null);
+		setSpecializationUnit(EntityFinder.getInstance().find(BudgetSpecializationUnit.class, identifier));
+		return this;
+	}
+	
+	public Budget setActVersionFromIdentifier(String identifier) {
+		if(StringHelper.isBlank(identifier))
+			setActVersion(null);
+		setActVersion(EntityFinder.getInstance().find(BudgetaryActVersion.class, identifier));
+		return this;
 	}
 	
 	public static final String FIELD_SPECIALIZATION_UNIT = "specializationUnit";

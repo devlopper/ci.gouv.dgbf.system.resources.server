@@ -1,0 +1,33 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
+  
+    <persistence-unit name="resourcesPersistenceUnit" transaction-type="JTA">
+    	<jta-data-source>java:/resources/server/dataSource</jta-data-source>
+    	
+    	<!-- Read -->
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.FundingSource</class>
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Lessor</class>
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.FundingSourceLessor</class>
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Funding</class>	
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Section</class>
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitType</class>
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitCategory</class>		
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnit</class>
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetaryAct</class>
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetaryActVersion</class>
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Budget</class>
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.EconomicNature</class>
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Activity</class>
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Expenditure</class>
+    	
+    	<!-- Transaction -->    	
+    	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Resource</class>
+    	
+    	<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="hibernate.hbm2ddl.auto" value="validate"/>
+			<property name="hibernate.show_sql" value="false"/>
+			<property name="hibernate.format_sql" value="false"/>
+		</properties>
+
+    </persistence-unit>  
+</persistence>

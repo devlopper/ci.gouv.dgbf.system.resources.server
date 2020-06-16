@@ -13,7 +13,7 @@
 	<groupId>ci.gouv.dgbf.system.resources.server.business</groupId>
 	<artifactId>resources-server-business-impl</artifactId>
 	<packaging>jar</packaging>
-
+	
 	<dependencies>
 		<dependency>
 			<groupId>ci.gouv.dgbf.system.resources.server.business</groupId>
@@ -33,6 +33,27 @@
 			<properties>
 				<org.cyk.test.classes>ci.gouv.dgbf.system.resources.server.business.impl.integration.DataSourceDefinition</org.cyk.test.classes>
 			</properties>
+			
+			<build>
+				<resources>
+					<resource>
+						<directory>src/test/resources</directory>
+						<filtering>true</filtering>
+						<includes>
+							<include>**/META-INF/persistence.xml</include>
+						</includes>
+					</resource>
+			
+					<resource>
+						<directory>src/test/resources</directory>
+						<filtering>false</filtering>
+						<includes>
+							<include>**/*.*</include>
+						</includes>
+					</resource>
+				</resources>
+			</build>
+			
 			<dependencies>
 				<dependency>
 					<groupId>com.h2database</groupId>
@@ -42,11 +63,4 @@
 			</dependencies>
 		</profile>
 	</profiles>
-	
-	<repositories>
-		<repository>
-			<id>repository.devkoms.com</id>
-			<url>ftp://devkoms.com/repository/</url>
-		</repository>
-	</repositories>
 </project>

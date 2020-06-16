@@ -30,6 +30,11 @@ import ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializ
 import ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetaryAct;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetaryActVersion;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.EconomicNature;
+import ci.gouv.dgbf.system.resources.server.persistence.entities.Expenditure;
+import ci.gouv.dgbf.system.resources.server.persistence.entities.Funding;
+import ci.gouv.dgbf.system.resources.server.persistence.entities.FundingSource;
+import ci.gouv.dgbf.system.resources.server.persistence.entities.FundingSourceLessor;
+import ci.gouv.dgbf.system.resources.server.persistence.entities.Lessor;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.Resource;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.Section;
 
@@ -39,7 +44,7 @@ public class ApplicationScopeLifeCycleListener extends AbstractApplicationScopeL
 
 	@Override
 	public void __initialize__(Object object) {
-		
+		__inject__(ci.gouv.dgbf.system.resources.server.persistence.entities.ApplicationScopeLifeCycleListener.class).initialize(null);
 	}
 	
 	@Override
@@ -47,8 +52,9 @@ public class ApplicationScopeLifeCycleListener extends AbstractApplicationScopeL
 
 	public static void initialize() {
 		DependencyInjection.setQualifierClassTo(ci.gouv.dgbf.system.resources.server.annotation.System.class,QueryResultMapper.class, EntityReader.class,EntityCounter.class);
-		PersistableClassesGetter.COLLECTION.set(List.of(Resource.class,Activity.class,Budget.class,EconomicNature.class,BudgetSpecializationUnit.class
-				,BudgetSpecializationUnitCategory.class,BudgetSpecializationUnitType.class,Section.class,BudgetaryActVersion.class,BudgetaryAct.class));
+		PersistableClassesGetter.COLLECTION.set(List.of(Expenditure.class,Resource.class,Activity.class,Budget.class,EconomicNature.class,BudgetSpecializationUnit.class
+				,BudgetSpecializationUnitCategory.class,BudgetSpecializationUnitType.class,Section.class,BudgetaryActVersion.class,BudgetaryAct.class
+				,Funding.class,FundingSourceLessor.class,FundingSource.class,Lessor.class));
 		
 		SectionQuerier.initialize();
 		BudgetaryActVersionQuerier.initialize();

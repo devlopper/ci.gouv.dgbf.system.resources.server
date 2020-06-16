@@ -52,5 +52,6 @@ public class ResourceRepresentationImpl extends AbstractRepresentationEntityImpl
 			return ResponseBuilder.getInstance().build(runnerArguments.getThrowable());
 		}
 		return Response.ok("Nothing has been saved").build();
-	}	
+	}
+	
 }

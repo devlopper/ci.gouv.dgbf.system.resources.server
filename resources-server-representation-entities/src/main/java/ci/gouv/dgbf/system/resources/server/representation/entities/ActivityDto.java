@@ -12,6 +12,7 @@ import lombok.experimental.Accessors;
 public class ActivityDto extends AbstractNamableWithAmountsDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	private BudgetaryActVersionDto budgetaryActVersion;
 	private BudgetSpecializationUnitDto budgetSpecializationUnit;
 	private ArrayList<ResourceDto> resources;
 }

@@ -13,27 +13,27 @@
 	<groupId>ci.gouv.dgbf.system.resources.server.persistence</groupId>
 	<artifactId>resources-server-persistence-impl</artifactId>
 	<packaging>jar</packaging>
-	
+	<!--
 	<build>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-					<filtering>true</filtering>
-					<includes>
-				        <include>**/META-INF/persistence.xml</include>
-				    </includes>
-				</resource>
-				
-				<resource>
-				    <directory>src/main/resources</directory>
-				    <filtering>false</filtering>
-				    <includes>
-				        <include>**/*.*</include>
-				    </includes>
-				</resource>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/META-INF/persistence.xml</include>
+				</includes>
+			</resource>
+	
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
 		</resources>
 	</build>
-	
+	-->
 	<dependencies>
 		<dependency>
 			<groupId>ci.gouv.dgbf.system.resources.server.persistence</groupId>
@@ -54,6 +54,25 @@
 			<properties>
 				<org.cyk.test.classes>ci.gouv.dgbf.system.resources.server.persistence.impl.integration.DataSourceDefinition</org.cyk.test.classes>
 			</properties>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/test/resources</directory>
+						<filtering>true</filtering>
+						<includes>
+							<include>**/META-INF/persistence.xml</include>
+						</includes>
+					</resource>
+			
+					<resource>
+						<directory>src/test/resources</directory>
+						<filtering>false</filtering>
+						<includes>
+							<include>**/*.*</include>
+						</includes>
+					</resource>
+				</resources>
+			</build>
 			<dependencies>
 				<dependency>
 					<groupId>com.h2database</groupId>
@@ -63,11 +82,4 @@
 			</dependencies>
 		</profile>
 	</profiles>	
-	
-	<repositories>
-		<repository>
-			<id>repository.devkoms.com</id>
-			<url>ftp://devkoms.com/repository/</url>
-		</repository>
-	</repositories>
 </project>
