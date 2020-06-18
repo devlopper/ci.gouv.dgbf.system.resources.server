@@ -2,6 +2,7 @@ package ci.gouv.dgbf.system.resources.server.persistence.api;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.cyk.utility.__kernel__.collection.CollectionHelper;
@@ -9,20 +10,21 @@ import org.cyk.utility.__kernel__.klass.PersistableClassesGetter;
 import org.cyk.utility.__kernel__.persistence.query.EntityReader;
 import org.cyk.utility.__kernel__.persistence.query.Query;
 import org.cyk.utility.__kernel__.persistence.query.QueryExecutorArguments;
-import org.cyk.utility.__kernel__.test.weld.AbstractPersistenceUnitTest;
 import org.junit.jupiter.api.Test;
 
 import ci.gouv.dgbf.system.resources.server.persistence.api.query.EconomicNatureQuerier;
+import ci.gouv.dgbf.system.resources.server.persistence.api.query.LessorQuerier;
 import ci.gouv.dgbf.system.resources.server.persistence.api.query.SectionQuerier;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.Activity;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnit;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitCategory;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.EconomicNature;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.FundingSource;
+import ci.gouv.dgbf.system.resources.server.persistence.entities.Lessor;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.Resource;
 import ci.gouv.dgbf.system.resources.server.persistence.entities.Section;
 
-public class PersistenceApiUnitTestProd extends AbstractPersistenceUnitTest {
+public abstract class AbstractPersistenceApiUnitTestValidate extends org.cyk.utility.__kernel__.test.weld.AbstractPersistenceUnitTest {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -33,17 +35,13 @@ public class PersistenceApiUnitTestProd extends AbstractPersistenceUnitTest {
 		//org.cyk.utility.__kernel__.persistence.query.QueryExecutor.AbstractImpl.LOG_LEVEL = java.util.logging.Level.INFO;
 	}
 	
-	@Override
-	protected String getPersistenceUnitName() {
-		return "prod";
-	}
-	
 	@SuppressWarnings("unchecked")
 	@Test
 	public void run(){
 		assertCountIsNotNull((Collection<Class<?>>) PersistableClassesGetter.COLLECTION.get());
 		printSections();
 		printEconomicNatures();
+		printLessorReadAllWithAllFundingSourcesOrderByCodeAscending();
 	}
 	
 	public void printSections(){
@@ -115,5 +113,13 @@ public class PersistenceApiUnitTestProd extends AbstractPersistenceUnitTest {
 					System.out.println("\t\t"+economicNature.getIdentifier()+" : "+economicNature.getAmount());
 				});
 			}
+	}
+	
+	public void printLessorReadAllWithAllFundingSourcesOrderByCodeAscending() {
+		System.out.println(StringUtils.repeat("-", 20)+" Lessor with all funding sources : "+StringUtils.repeat("-", 20));
+		Collection<Lessor> lessors = EntityReader.getInstance().readMany(Lessor.class, new QueryExecutorArguments().setQuery(new Query().setIdentifier(LessorQuerier.QUERY_IDENTIFIER_READ_ALL_WITH_ALL_FUNDING_SOURCES_ORDER_BY_CODE_ASCENDING)));
+		if(CollectionHelper.isNotEmpty(lessors))
+			for(Lessor lessor : lessors)
+				System.out.println(lessor+" : "+lessor.getFundingSourceLessors().stream().map(x -> x.getFundingSource().getCode()+":"+(x.getEconomicNature() == null ? "?" : x.getEconomicNature().getCode())).collect(Collectors.toList()));		
 	}
 }

@@ -13,9 +13,11 @@ import lombok.experimental.Accessors;
 public class FundingSourceLessorDto extends AbstractIdentifiableSystemScalarStringImpl implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Override
-	public FundingSourceLessorDto setIdentifier(String identifier) {
-		return (FundingSourceLessorDto) super.setIdentifier(identifier);
-	}
+	private FundingSourceDto fundingSource;
+	//private LessorDto lessor;
+	private String lessorIdentifier;
+	private EconomicNatureDto economicNature;
+	
+	private Boolean deletable;
 
 }

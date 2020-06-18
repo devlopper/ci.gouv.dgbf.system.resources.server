@@ -5,4 +5,6 @@ import org.cyk.utility.server.business.BusinessEntity;
 
 public interface FundingSourceLessorBusiness extends BusinessEntity<FundingSourceLessor> {
 
+	String SAVE_ECONOMIC_NATURES = "FundingSourceLessor.saveEconomicNatures";
+	
 }

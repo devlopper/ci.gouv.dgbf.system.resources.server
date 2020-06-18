@@ -7,6 +7,7 @@ import org.cyk.utility.__kernel__.persistence.query.EntityReader;
 import org.cyk.utility.__kernel__.persistence.query.QueryExecutorArguments;
 
 import ci.gouv.dgbf.system.resources.server.persistence.api.query.ActivityQuerier;
+import ci.gouv.dgbf.system.resources.server.persistence.api.query.LessorQuerier;
 import ci.gouv.dgbf.system.resources.server.persistence.api.query.ResourceQuerier;
 import ci.gouv.dgbf.system.resources.server.persistence.api.query.SectionQuerier;
 
@@ -21,6 +22,9 @@ public class EntityReaderImpl extends EntityReader.AbstractImpl implements Seria
 					.equals(arguments.getQuery().getIdentifier()))
 				return (Collection<T>) SectionQuerier.getInstance().readAggregationByBudgetaryActVersionCodeOrderByCodeAscending(
 						(String)arguments.getFilterFieldValue(SectionQuerier.PARAMETER_NAME_BUDGETARY_ACT_VERSION_CODE), Boolean.TRUE, Boolean.TRUE);
+			
+			if(LessorQuerier.QUERY_IDENTIFIER_READ_ALL_WITH_ALL_FUNDING_SOURCES_ORDER_BY_CODE_ASCENDING.equals(arguments.getQuery().getIdentifier()))
+				return (Collection<T>) LessorQuerier.getInstance().readAllWithAllFundingSourcesOrderByCodeAscending();
 			
 			if(ResourceQuerier.QUERY_IDENTIFIER_READ_VIEW_01.equals(arguments.getQuery().getIdentifier()))
 				return (Collection<T>) ResourceQuerier.getInstance().readMany(arguments);

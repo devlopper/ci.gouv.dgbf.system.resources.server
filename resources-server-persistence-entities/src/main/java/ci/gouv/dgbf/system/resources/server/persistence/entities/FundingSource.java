@@ -1,6 +1,8 @@
 package ci.gouv.dgbf.system.resources.server.persistence.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -17,8 +19,8 @@ import lombok.experimental.Accessors;
 @Entity @Table(name=FundingSource.TABLE_NAME)
 @AttributeOverrides(value = {
 		@AttributeOverride(name = FundingSource.FIELD_IDENTIFIER,column = @Column(name="UUID"))
-		,@AttributeOverride(name = FundingSource.FIELD_CODE,column = @Column(name="CAT_SRC_CODE"))
-		,@AttributeOverride(name = FundingSource.FIELD_NAME,column = @Column(name="CAT_SRC_LIBELLE"))
+		,@AttributeOverride(name = FundingSource.FIELD_CODE,column = @Column(name="SRC_CODE"))
+		,@AttributeOverride(name = FundingSource.FIELD_NAME,column = @Column(name="SRC_LIBELLE"))
 })
 public class FundingSource extends AbstractIdentifiableSystemScalarStringIdentifiableBusinessStringNamableImpl implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -40,7 +42,9 @@ public class FundingSource extends AbstractIdentifiableSystemScalarStringIdentif
 	
 	public static final String TABLE_NAME = "SOURCE_FINANCEMENT";
 	
-	public static final String CODE_TRESOR = "0";
-	public static final String CODE_DON = "1";
-	public static final String CODE_EMPRUNT = "2";
+	public static final String CODE_TRESOR = "1";
+	public static final String CODE_DON = "2";
+	public static final String CODE_EMPRUNT = "3";
+	
+	public static final Collection<String> CATEGORY_EXTERNAL_CODES = List.of(CODE_DON,CODE_EMPRUNT);
 }

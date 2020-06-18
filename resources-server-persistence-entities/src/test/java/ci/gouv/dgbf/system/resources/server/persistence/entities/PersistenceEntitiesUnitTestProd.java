@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
 import org.cyk.utility.__kernel__.collection.CollectionHelper;
+import org.cyk.utility.__kernel__.klass.PersistableClassesGetter;
 import org.cyk.utility.__kernel__.persistence.query.EntityReader;
 import org.cyk.utility.__kernel__.test.weld.AbstractPersistenceUnitTest;
 import org.junit.jupiter.api.Test;
@@ -16,10 +17,10 @@ public class PersistenceEntitiesUnitTestProd extends AbstractPersistenceUnitTest
 		return "prod";
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void run(){
-		assertCountIsGreaterThanZero(Section.class,BudgetSpecializationUnitType.class,BudgetSpecializationUnitCategory.class
-				,BudgetSpecializationUnit.class,Activity.class,EconomicNature.class);
+		assertCountIsNotNull((Collection<Class<?>>)PersistableClassesGetter.COLLECTION.get());
 	}
 	
 	public void printSections(){

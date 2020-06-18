@@ -179,7 +179,7 @@ public interface SectionQuerier extends Querier {
 				for(Section section : sections)
 					all.addAll(section.getBudgetSpecializationUnits());
 			}
-			if(CollectionHelper.isNotEmpty(budgetSpecializationUnits) && Boolean.TRUE.equals(isGetTree)) {
+			if(CollectionHelper.isNotEmpty(all) && Boolean.TRUE.equals(isGetTree)) {
 				Collection<String> budgetSpecializationUnitsCodes = CollectionHelper.cast(String.class,FieldHelper.readBusinessIdentifiers(all));
 				readActivities(all, budgetSpecializationUnitsCodes, budgetaryActVersionCode, isGetAll);
 			}
