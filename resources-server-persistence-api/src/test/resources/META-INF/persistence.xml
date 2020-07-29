@@ -10,6 +10,7 @@
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.FundingSourceLessor</class>
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Funding</class>	
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Section</class>
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetCategory</class>
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitType</class>
     	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitCategory</class>		
     	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnit</class>
@@ -45,6 +46,7 @@
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.FundingSourceLessor</class>
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Funding</class>	
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Section</class>
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetCategory</class>
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitType</class>
     	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitCategory</class>		
     	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnit</class>
@@ -79,6 +81,7 @@
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.FundingSourceLessor</class>
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Funding</class>	
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.Section</class>
+		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetCategory</class>
 		<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitType</class>
     	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnitCategory</class>		
     	<class>ci.gouv.dgbf.system.resources.server.persistence.entities.BudgetSpecializationUnit</class>
